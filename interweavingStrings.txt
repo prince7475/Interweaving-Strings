@@ -1,0 +1,158 @@
+Write a function that takes in three strings and returns a boolean representing
+whether or not the third string can be formed by interweaving the first two 
+strings. To interweave strings means to merge them by alternating their letters
+without any specific pattern. For instance, the strings "abc" and "123" can be
+interwoven as "a1b2c3", as "abc123", and as "ab1c23" (this list is nonexhaustive).
+
+
+
+Input: "abc", "def", "abcdef"
+Output: true
+
+
+WRONG ANSWER -> The order of the strings matters -> can use a queue to keep the order
+function interwavingStrings(one,two,three){
+  let allLetters = {}
+  addLetters(one,allLetters)
+  addLetters(two,allLetters)
+  
+  for(let letter of three){
+    if(!(letter in allLetters || allLetters[letter] === 0)) return false
+    allLetters[letter] -= 1
+  }
+  
+  if(let key in allLetters){
+    if(allLetters[key] > 0) return flase
+  }
+  return true
+  
+}
+
+
+function addLetters (str, hashMap){
+  for(let letter of str){
+    if(!(letter in hashMap)) hashMap[letter] = 0
+    hashMap[letter] += 1
+  }
+}
+
+Time -> O(N + M)
+Space -> O(N + M)
+Main(str1,str2,allStr)
+let allLetters = {}
+
+for(let letter of str1){
+  if(!(letter in allLetters)) allLetters[letter] = 0
+  allLetters[letter] += 1
+}
+
+for(let letter of str2){
+  if(!(letter in allLetters)) allLetters[letter]= 0
+  allLetters[letter] += 1
+}
+
+for(let letter of allStr){
+  if(!(letter in allLetters) || allLetters[letter] === 0) return false
+  allLetters[letter] -= 1
+}
+
+for(let key in allLetters){
+  if(allLetters[key] > 0) return false
+}
+return true
+
+
+
+
+function interweavingStrings(one,two,three){
+  let strOneQueue = []
+  let strTwoQueue = []
+  
+  addItemsToQueue(one,strOneQueue)
+  addItemsToQueue(two,strTwoQueue)
+  
+  for(let i = 0; i < three.length; i++){
+    let currLetter = three[i]
+    if(currLetter === strOneQueue[0] || currLetter === strTwoQueue[0]){
+      if(currLetter === strOneQueue[0]){
+        strOneQueue.shift()
+      }else {
+        strTwoQueue.shift()
+      }
+    }else {
+      return false
+    }
+  }
+  
+  return (strOneQueue.length === 0 && strTwoQueue.length === 0)
+  
+}
+
+
+function addItemsToQueue(str, arr){
+  for(let letter of str){
+    arr.push(letter)
+  }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
