@@ -118,7 +118,7 @@ helper(str1,str2,str3,i,j)
 
 return false
 
-Time -> 2^(n + m)
+Time -> 2^(n + m) (without caching)
 
 Space -> (nm)
 
@@ -143,19 +143,21 @@ function interweavingHelper(str1,str2,str3,i,j,cache){
   if(cache[i][j] !== null) return cache[i][j]
   
   if(i < str1.length && str1[i] === str3[k]){
-     cache[i][j] = interweavingHelper(str1,str2,str3, i + 1, j)
+     cache[i][j] = interweavingHelper(str1,str2,str3, i + 1, j, cache)
     if(cache[i][j]){
       return true
     }
   }
   
   if(j < str2.length && str2[j] === str3[k]){
-    cache[i][j] = interweavingHelper(str1,str2,str3,i, j + 1)
+    cache[i][j] = interweavingHelper(str1,str2,str3,i, j + 1,cache)
+		return cache[i][j]
   }
   
   cache[i][j] = false
   return false
 }
+
 
 
 
