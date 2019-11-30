@@ -1,0 +1,96 @@
+
+
+Time -> O(NM)
+Space -> O(NM)
+main(str1,str2,str3){
+  if(str1.length + str2.length !== str3.length) return false
+  let cache = []
+  for(let i = 0; i < str1.length + 1; i++){
+    let row = []
+    for(let j = 0; j < str2.length; j++){
+      row.push(null)
+    }
+    cache.push(row)
+  }
+  
+  
+  helper(str1,str2,str3,0,0, cache)
+}
+
+
+helper(str1,str2,str3,i,j,cache)
+if(cache[i][j] !== null) return cache[i][j]
+let k = i + j
+if(k === str3.length) return true
+
+if(i < str1.length && str1[i] === str3[k]){
+  cache[i][j] = helper(str1, str2,str3, i + 1, j,cache)
+  if(cachep[i][j]){
+    return true
+  }
+}
+
+if(j < str2.length && str2[j] === str3[k]){
+  cache[i][j] = helper(str1,str2,str3, i, j + 1, cache)
+  return cache[i][j]
+}
+
+cache[i][j] = false
+return false
+
+
+
+
+
+function interweavingStrings(one,two,three){
+  if(one.length + two.length !== three.length) return false
+  let cache = []
+  for(let i = 0; i <= one.length; i ++){
+    let row = []
+    for(let j = 0; j <= two.length; j++){
+      row.push(null)
+    }
+    cache.push(row)
+  }
+  return interweavingHelper(one,two,three,0,0,cache)
+}
+
+function interweavingHelper(str1,str2,str3,i,j,cache){
+  if(cache[i][j] !== null) return cache[i][j]
+  let k = i + j
+  if(k === str3.length) return true
+  
+  if(i < str1.length && str1[i] === str3[k]){
+   cache[i][j] = interweavingHelper(str1,str2,str3,i + 1, j,cache)
+   if(cache[i][j] === true){
+    return cache[i][j]
+   }
+  }
+  
+  if(j < str2.length && str2[j] === str3[k]){
+    cache[i][j] = interweavingHelper(str1,str2,str3, i, j + 1,cache)
+    return cache[i][j]
+  }
+  
+  cache[i][j] = false
+  return false
+  
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
